@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PingPong : MonoBehaviour
 {
+    //Движется из одной точки в другую и обратно
+
     public Vector3 point1;
     public Vector3 point2 = new Vector3(10, 10, 10);
     public float velocity = 5;

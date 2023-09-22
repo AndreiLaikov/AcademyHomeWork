@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class Scaler : MonoBehaviour
 {
-    public int destScale = 2;
+    //Плавно увеличивается до заданного значения
 
+    public int destScale = 2;
     private Vector3 scale;
 
     void Start()

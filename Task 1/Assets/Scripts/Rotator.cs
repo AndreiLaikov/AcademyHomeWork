@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Rotator : MonoBehaviour
 {
+    //Вращается в определенном направлении с заданной скоростью
     public bool x;
     public bool y;
     public bool z;
