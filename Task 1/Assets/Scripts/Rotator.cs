@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Rotator : MonoBehaviour
@@ -17,7 +15,6 @@ public class Rotator : MonoBehaviour
     {
         axis2 = new Vector3(Convert.ToInt32(x), Convert.ToInt32(y), Convert.ToInt32(z));
         transform.rotation *= Quaternion.AngleAxis(velocity * Time.deltaTime, axis2);
-
     }
 
 }
