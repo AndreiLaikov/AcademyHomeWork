@@ -8,7 +8,7 @@ public class PingPong : MonoBehaviour
     public Vector3 point2 = new Vector3(10, 10, 10);
     public float velocity = 5;
 
-    private Vector3 targetpos;
+    private Vector3 targetPos;
     private bool isBackward;
 
     void Start()
@@ -20,22 +20,15 @@ public class PingPong : MonoBehaviour
 
     void Update()
     {
-        if (isBackward)
-            targetpos = point1;
-        else
-            targetpos = point2;
-
+        targetPos = isBackward ? point1 : point2;
         Move();
     }
 
     private void Move()
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetpos, velocity * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, velocity * Time.deltaTime);
 
-      //  if (transform.position == targetpos)
-        //    isBackward = !isBackward;
-
-        if(Vector3.Distance(targetpos,transform.position)<0.01f)
+        if(Vector3.Distance(targetPos, transform.position)<0.001f)
             isBackward = !isBackward;
     }
 }

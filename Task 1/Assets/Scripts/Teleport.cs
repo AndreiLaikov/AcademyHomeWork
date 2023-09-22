@@ -3,6 +3,7 @@ using UnityEngine;
 public class Teleport : MonoBehaviour
 {
     //Телепортируется в рандомную точку раз в N секунд
+
     public float timeToTeleport = 1;
     public Vector3 minPos;
     public Vector3 maxPos;

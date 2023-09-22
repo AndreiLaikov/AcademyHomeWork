@@ -5,7 +5,6 @@ public class Scaler : MonoBehaviour
     //Плавно увеличивается до заданного значения
 
     public int destScale = 2;
-    private Vector3 scale;
 
     void Start()
     {
@@ -14,8 +13,7 @@ public class Scaler : MonoBehaviour
    
     void Update()
     {
-        scale = Vector3.one * destScale;
-
-        transform.localScale = Vector3.Lerp(transform.localScale,scale,Time.deltaTime);
+        var scale = Vector3.one * destScale;
+        transform.localScale = Vector3.Lerp(transform.localScale, scale, Time.deltaTime);
     }
 }
