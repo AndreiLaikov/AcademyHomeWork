@@ -28,7 +28,7 @@ public class PingPong : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, targetPos, velocity * Time.deltaTime);
 
-        if(Vector3.Distance(targetPos, transform.position)<0.001f)
+        if(Vector3.SqrMagnitude(targetPos - transform.position)< 0.0001f)
             isBackward = !isBackward;
     }
 }
