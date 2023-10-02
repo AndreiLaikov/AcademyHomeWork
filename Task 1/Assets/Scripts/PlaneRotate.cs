@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlaneRotate : MonoBehaviour
 {
@@ -12,6 +11,7 @@ public class PlaneRotate : MonoBehaviour
     private float mousePos;
     private Quaternion deltaRot;
 
+
     private void Start()
     {
         root = this.transform;
@@ -20,6 +20,7 @@ public class PlaneRotate : MonoBehaviour
     private void Update()
     {
         mousePos = Input.mousePosition.x - Screen.width;
+
         if (Input.GetMouseButton(0))
         {
             deltaMousePos = prevMousePos - mousePos;
@@ -36,6 +37,6 @@ public class PlaneRotate : MonoBehaviour
 
     private void OnRotate()
     {
-        Debug.Log("asf");
+        //TODO ??????????? ??? ???????? "???? ?????? ??????"
     }
 } 
