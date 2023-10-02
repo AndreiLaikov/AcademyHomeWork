@@ -26,8 +26,8 @@ public class PlaneSwitcher : MonoBehaviour
         _activePlane = planes[0];
         _activePlane.SetActive(true);
 
-        btnNext.onClick.AddListener(() => Next());
-        btnPrevious.onClick.AddListener(() => Prev());
+        btnNext.onClick.AddListener(Next);
+        btnPrevious.onClick.AddListener(Prev);
     }
 
     public void Activate()
