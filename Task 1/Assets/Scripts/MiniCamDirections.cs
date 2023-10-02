@@ -32,16 +32,16 @@ public class MiniCamDirections : MonoBehaviour
         switch (currentDir.dir)
         {
             case DirEnum.Directions.Up:
-                transform.rotation = Quaternion.Euler(up);
+                transform.localRotation = Quaternion.Euler(up);
                 break;
             case DirEnum.Directions.Down:
-                transform.rotation = Quaternion.Euler(down);
+                transform.localRotation = Quaternion.Euler(down);
                 break;
             case DirEnum.Directions.Left:
-                transform.rotation = Quaternion.Euler(left);
+                transform.localRotation = Quaternion.Euler(left);
                 break;
             case DirEnum.Directions.Front:
-                transform.rotation = Quaternion.Euler(front);
+                transform.localRotation = Quaternion.Euler(front);
                 break;
         }
     }
