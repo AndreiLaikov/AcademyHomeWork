@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlaneRotate : MonoBehaviour
 {
@@ -31,5 +32,10 @@ public class PlaneRotate : MonoBehaviour
 
         prevMousePos = mousePos;
         root.rotation = deltaRot * root.rotation;
+    }
+
+    private void OnRotate()
+    {
+        Debug.Log("asf");
     }
 } 
