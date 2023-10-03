@@ -3,7 +3,6 @@ using UnityEngine;
 public class RobotShooter : MonoBehaviour
 {
     public GameObject simpleBulletPrefab;
-
     public BulletType currentBullet;
 
     private void Start()
@@ -15,12 +14,14 @@ public class RobotShooter : MonoBehaviour
     public void SimpleBulletShoot()
     {
         var pos = transform.position + Vector3.forward;
-        Instantiate(simpleBulletPrefab, pos, Quaternion.identity);
+
+        Instantiate(simpleBulletPrefab, pos, transform.rotation);
+        
     }
 
     public void Update()
     {
-        if(Input.GetKey(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space))
             Shoot();
     }
 

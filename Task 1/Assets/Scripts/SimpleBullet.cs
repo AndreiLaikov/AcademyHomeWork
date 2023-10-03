@@ -10,7 +10,7 @@ public class SimpleBullet : MonoBehaviour
     public void Start()
     {
         rBody = GetComponent<Rigidbody>();
-        rBody.AddForce(Vector3.forward * force);
+        rBody.AddForce(transform.forward * force);
     }
 
     public void Update()
