@@ -4,7 +4,10 @@ public class RobotShooter : MonoBehaviour
 {
     public GameObject simpleBulletPrefab;
     public GameObject tennisBulletPrefab;
+    public GameObject grenadeBulletPrefab;
     public BulletType currentBullet;
+
+    public Transform gunPosition;
 
     private void Start()
     {
@@ -13,8 +16,8 @@ public class RobotShooter : MonoBehaviour
 
     public void BulletShoot(GameObject bulletPrefab)
     {
-        var pos = transform.position + Vector3.forward;
-        Instantiate(bulletPrefab, pos, transform.rotation);
+        var pos = transform.position;
+        Instantiate(bulletPrefab, gunPosition.position, transform.rotation);
     }
 
     public void Update()
@@ -32,6 +35,9 @@ public class RobotShooter : MonoBehaviour
                 break;
             case BulletType.bTypes.Tennis:
                 BulletShoot(tennisBulletPrefab);
+                break;
+            case BulletType.bTypes.Grenade:
+                BulletShoot(grenadeBulletPrefab);
                 break;
         }
     }

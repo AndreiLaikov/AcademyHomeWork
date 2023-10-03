@@ -6,7 +6,7 @@ public class BulletType : MonoBehaviour
     {
         None,
         Simple,
-        Granade,
+        Grenade,
         Tennis
     }
 
