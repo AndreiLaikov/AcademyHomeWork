@@ -7,6 +7,7 @@ public class RobotMover : MonoBehaviour
 
     private Rigidbody rBody;
 
+
     private void Start()
     {
         rBody = GetComponent<Rigidbody>();
@@ -15,7 +16,7 @@ public class RobotMover : MonoBehaviour
     private void Update()
     {
         Move();
-        Rotate();   
+        Rotate();
     }
 
     private void Rotate()

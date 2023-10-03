@@ -16,7 +16,6 @@ public class RobotShooter : MonoBehaviour
 
     public void BulletShoot(GameObject bulletPrefab)
     {
-        var pos = transform.position;
         Instantiate(bulletPrefab, gunPosition.position, transform.rotation);
     }
 
