@@ -3,6 +3,7 @@ using UnityEngine;
 public class RobotShooter : MonoBehaviour
 {
     public GameObject simpleBulletPrefab;
+    public GameObject tennisBulletPrefab;
     public BulletType currentBullet;
 
     private void Start()
@@ -10,13 +11,10 @@ public class RobotShooter : MonoBehaviour
         currentBullet = GetComponent<BulletType>();
     }
 
-    [ContextMenu("SimpleShoot")]
-    public void SimpleBulletShoot()
+    public void BulletShoot(GameObject bulletPrefab)
     {
         var pos = transform.position + Vector3.forward;
-
-        Instantiate(simpleBulletPrefab, pos, transform.rotation);
-        
+        Instantiate(bulletPrefab, pos, transform.rotation);
     }
 
     public void Update()
@@ -30,9 +28,11 @@ public class RobotShooter : MonoBehaviour
         switch (currentBullet.bType)
         {
             case BulletType.bTypes.Simple:
-                SimpleBulletShoot();
+                BulletShoot(simpleBulletPrefab);
                 break;
-           
+            case BulletType.bTypes.Tennis:
+                BulletShoot(tennisBulletPrefab);
+                break;
         }
     }
 
