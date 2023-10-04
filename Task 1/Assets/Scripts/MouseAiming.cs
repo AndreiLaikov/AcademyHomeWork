@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MouseAiming : MonoBehaviour
@@ -9,7 +7,6 @@ public class MouseAiming : MonoBehaviour
     private float yRot;
     private float xRot;
     private Rigidbody rBody;
-    private Vector3 prevMousePos;
 
     private void Start()
     {
@@ -23,22 +20,15 @@ public class MouseAiming : MonoBehaviour
 
         yRot += Input.GetAxis("Mouse X") * ySensitive;
 
-
-        transform.rotation *= Quaternion.Euler(xRot, yRot, 0);
+        transform.rotation = Quaternion.Euler(xRot, yRot, 0);
     }
-
-   
 
     private void Update()
     {
-        if(Input.GetMouseButton(0))
-        {
-            rBody.isKinematic = true;
+        rBody.isKinematic = Input.GetMouseButton(0);
+
+        if (Input.GetMouseButton(0))
             Aim();
-        }
-        else
-        {
-            rBody.isKinematic = false;
-        }
+       
     }
 }

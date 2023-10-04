@@ -16,7 +16,7 @@ public class RobotShooter : MonoBehaviour
 
     public void BulletShoot(GameObject bulletPrefab)
     {
-        Instantiate(bulletPrefab, gunPosition.position, transform.rotation);
+        Instantiate(bulletPrefab, gunPosition.position, gunPosition.rotation);
     }
 
     public void Update()
