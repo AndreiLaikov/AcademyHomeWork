@@ -7,46 +7,34 @@ public class Char : MonoBehaviour
     public float gravity = -9.81f;
     public float speed;
 
-    public bool isReadyToJump;
-
-    private float jump;
+    private float yVel = 0;
 
     private CharacterController controller;
     public CharacterController Controller { get { return controller = controller ?? GetComponent<CharacterController>(); } }
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-
-        float rotation = Input.GetAxis("Mouse X");
-
-
-        if (isReadyToJump && Input.GetKeyDown(KeyCode.Space))
+        if (Controller.isGrounded && yVel < 0)
         {
-            jump = 1;
+            yVel = 0;
         }
-        else
-        {
-            jump = 0;
-        }    
 
-        Vector3 movement = new Vector3(horizontal * speed, gravity+jump*speed, vertical * speed);
+        float horizontal = Input.GetAxis("Horizontal")* speed;
+        float vertical = Input.GetAxis("Vertical") * speed;
+        float rotation = Input.GetAxis("Mouse X")*speed;
 
-        //Controller.SimpleMove(transform.TransformDirection(movement));
+        Vector3 movement = new Vector3(horizontal, gravity, vertical);
+
         Controller.Move(transform.TransformDirection(movement) * Time.deltaTime);
         Controller.transform.Rotate(Vector3.up, rotation);
 
-        
+        if (Input.GetButton("Jump") && Controller.isGrounded)
+        {
+            yVel += Mathf.Sqrt(-30 * gravity);
+        }
+        yVel += gravity * Time.deltaTime;
+
+        Controller.Move(new Vector3(0, yVel, 0) * Time.deltaTime);
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        isReadyToJump = true;
-    }
 }
