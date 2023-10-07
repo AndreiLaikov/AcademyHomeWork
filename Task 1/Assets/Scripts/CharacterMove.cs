@@ -28,8 +28,8 @@ public class CharacterMove : MonoBehaviour
 
     private void Update()
     {
-        Move();
-        Jump();
+        //Move();
+        //Jump();
     }
 
     private void Move()
@@ -44,6 +44,12 @@ public class CharacterMove : MonoBehaviour
             Controller.Move(dir * Speed * Time.deltaTime);//else it's break isGrounded
         }
         
+    }
+
+    public void MoveWithTouch(Vector2 touchDir)
+    {
+        var dir = touchDir.x * transform.right + touchDir.y * transform.forward;
+        Controller.Move(dir * Speed * Time.deltaTime);
     }
 
     private void Jump()//v=Sqrt(h*-2*g)

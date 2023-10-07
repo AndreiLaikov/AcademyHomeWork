@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TouchController : MonoBehaviour
@@ -8,27 +6,40 @@ public class TouchController : MonoBehaviour
     public Vector2 sumVec;
     public GameObject arrow;
 
-    private float halfString;
+    public CharacterMove character;
+
+    private float halfScreen;
 
     private void Start()
     {
-        halfString = Screen.width / 2;
+        halfScreen = Screen.width / 2;
     }
 
     private void Update()
     {
-        if (Input.touchCount > 0 && Input.touches[0].position.x < halfString)
+        if (Input.touchCount > 0)
         {
             if(Input.touches[0].phase == TouchPhase.Began)
             {
                 startPos = Input.touches[0].position;
             }
-            if (Input.touches[0].phase == TouchPhase.Moved)
+            if (Input.touches[0].phase == TouchPhase.Moved && Input.touches[0].position.x < halfScreen)
             {
                 sumVec = (Input.touches[0].position - startPos).normalized;
                 arrow.transform.up = sumVec;
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(sumVec.x, sumVec.y,0), 5*Time.deltaTime);
+
+               // startPos = Input.touches[0].position;
+                //transform.position = Vector3.MoveTowards(transform.position, new Vector3(sumVec.x, sumVec.y,0), 5*Time.deltaTime);
             }
+           
         }
+        else
+        {
+            sumVec = Vector2.zero;
+        }
+        character.MoveWithTouch(sumVec);
+
+
+
     }
 }
