@@ -6,13 +6,15 @@ public class CharacterMove : MonoBehaviour
     public float Speed = 10;
     public float JumpHeight = 2;
 
-    public Transform GroundChecker;
-    public float GroundDistance = 3;
+    //public Transform GroundChecker;
+    //public LayerMask GroundMask;
 
     private const float gravity = -9.81f;
-    private Vector3 velocity;
     private bool isGrounded;
-    public LayerMask GroundMask;
+    private Vector3 upVelocity;
+    public bool isJumping;
+
+    private Vector3 resultDir;
 
     private void Start()
     {
@@ -20,57 +22,42 @@ public class CharacterMove : MonoBehaviour
         {
             Debug.LogError("Missing Controller");
         }
-        if (GroundChecker == null)
-        {
-            Debug.LogError("Missing GroundChecker");
-        }
     }
 
     private void Update()
     {
-        //Move();
-        //Jump();
+        Jump();
     }
 
-    private void Move()
-    {
-        var x = Input.GetAxis("Horizontal");
-        var z = Input.GetAxis("Vertical");
-
-        var dir = x * transform.right + z * transform.forward;
-
-        if (x!=0 || z!=0)
-        { 
-            Controller.Move(dir * Speed * Time.deltaTime);//else it's break isGrounded
-        }
-        
-    }
 
     public void MoveWithTouch(Vector2 touchDir)
     {
-        var dir = touchDir.x * transform.right + touchDir.y * transform.forward;
-        Controller.Move(dir * Speed * Time.deltaTime);
+        var right = touchDir.x * Speed * transform.right;
+        var forward = touchDir.y * Speed * transform.forward ;
+        
+        resultDir = right + forward + upVelocity;
+        Controller.Move(resultDir * Time.deltaTime);
     }
 
-    private void Jump()//v=Sqrt(h*-2*g)
+    public void Jump()// dy=0.5*g* t^2
     {
         //isGrounded = Physics.CheckSphere(GroundChecker.position, GroundDistance, GroundMask);
 
         isGrounded = Controller.isGrounded;
 
-        if (isGrounded && velocity.y < 0)
+        if (isGrounded && upVelocity.y < 0)
         {
-            velocity.y = -2.0f;//small value, not 0 for remove jitter
+            upVelocity.y = -2.0f;//small value, not 0 for remove jitter
         }
 
-        if(Input.GetButtonDown("Jump")&& isGrounded)
+        if(isJumping && isGrounded)
         {
-            velocity.y = Mathf.Sqrt(-2f * JumpHeight * gravity);
+            upVelocity.y = Mathf.Sqrt(-2f * JumpHeight * gravity); //v=Sqrt(h*-2*g)
         }
 
-        velocity.y += gravity*Time.deltaTime;
+        upVelocity.y += gravity*Time.deltaTime;
 
-        Controller.Move(velocity * Time.deltaTime);// dy=0.5*g*t^2
+        upVelocity = new Vector3(0, upVelocity.y, 0);
     }
 
 

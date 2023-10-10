@@ -135,9 +135,9 @@ GameObject:
   - component: {fileID: 536419787}
   - component: {fileID: 536419786}
   - component: {fileID: 536419785}
-  - component: {fileID: 536419784}
   - component: {fileID: 536419789}
   - component: {fileID: 536419790}
+  - component: {fileID: 536419791}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -145,22 +145,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &536419784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 536419783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83ab57b1c812b44afa597e92bd934109, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startPos: {x: 0, y: 0}
-  sumVec: {x: 0, y: 0}
-  arrow: {fileID: 659640615}
-  character: {fileID: 536419789}
 --- !u!65 &536419785
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -244,7 +228,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1670168588}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &536419789
@@ -260,7 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Controller: {fileID: 536419790}
-  Speed: 10
+  Speed: 1
   JumpHeight: 2
   GroundChecker: {fileID: 0}
   GroundDistance: 3
@@ -293,6 +278,26 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &536419791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536419783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83ab57b1c812b44afa597e92bd934109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startMovePos: {x: 0, y: 0}
+  sumMoveVector: {x: 0, y: 0}
+  isTouchMoveRegistered: 0
+  startLookPos: {x: 0, y: 0}
+  sumLookVector: {x: 0, y: 0}
+  isTouchLookRegistered: 0
+  character: {fileID: 536419789}
+  cam: {fileID: 1670168589}
 --- !u!1 &659640615
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,6 +416,7 @@ GameObject:
   - component: {fileID: 1670168588}
   - component: {fileID: 1670168587}
   - component: {fileID: 1670168586}
+  - component: {fileID: 1670168589}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -485,13 +491,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1670168585}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 536419788}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1670168589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670168585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bff22bf22ec0b40d2bbf3df7d9993784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Body: {fileID: 536419788}
+  MouseSensitivity: 100
+  RotationRestriction: {x: 0, y: 0}
 --- !u!1 &1858106449
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,7 +611,6 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1670168588}
   - {fileID: 1858106451}
   - {fileID: 536419788}
   - {fileID: 659640619}
