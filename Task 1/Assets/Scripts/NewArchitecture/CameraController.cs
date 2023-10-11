@@ -6,7 +6,15 @@ public class CameraController : MonoBehaviour
     public float MouseSensitivity = 1000;
     public Vector2 RotationRestriction = new Vector2(-20, 30);
     private float xRotation = 0;
-    
+
+    private MouseInput mInput;
+
+    private void Start()
+    {
+        mInput = gameObject.AddComponent<MouseInput>();
+        mInput.MovingInputReciever += LookWithTouch;
+    }
+
     private void LookWithTouch(Vector2 delta)
     {
         float yRotation = delta.x * MouseSensitivity * Time.deltaTime;
@@ -18,16 +26,5 @@ public class CameraController : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, RotationRestriction.x, RotationRestriction.y);
 
         CameraPivot.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-    }
-
-    public void Update()
-    {
-        if (Input.GetMouseButton(0))
-        {
-            var yRot = Input.GetAxis("Mouse X");
-            var xRot = Input.GetAxis("Mouse Y");
-
-            LookWithTouch(new Vector2(yRot, xRot));
-        }
     }
 }
