@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-    public Transform Body;
+    public Transform Camera;
     public float MouseSensitivity;
     public Vector2 RotationRestriction;
     private float xRotation;
@@ -10,9 +10,9 @@ public class MouseLook : MonoBehaviour
 
     private void Start()
     {
-        if(Body == null)
+        if(Camera == null)
         {
-            Debug.LogError("Missing body");
+            Debug.LogError("Missing camera");
         }
     }
 
@@ -20,12 +20,12 @@ public class MouseLook : MonoBehaviour
     public void LookWithTouch(Vector2 touchDir)
     {
         float yRotation = touchDir.x * MouseSensitivity * Time.deltaTime;
-        Body.Rotate(Vector3.up, yRotation);
+        transform.Rotate(Vector3.up, yRotation);
 
         float mouseY = touchDir.y * MouseSensitivity * Time.deltaTime;
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, RotationRestriction.x, RotationRestriction.y);
 
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        Camera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
     }
 }

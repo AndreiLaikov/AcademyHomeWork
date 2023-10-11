@@ -6,9 +6,6 @@ public class CharacterMove : MonoBehaviour
     public float Speed = 10;
     public float JumpHeight = 2;
 
-    //public Transform GroundChecker;
-    //public LayerMask GroundMask;
-
     private const float gravity = -9.81f;
     private bool isGrounded;
     private Vector3 upVelocity;
@@ -29,7 +26,6 @@ public class CharacterMove : MonoBehaviour
         Jump();
     }
 
-
     public void MoveWithTouch(Vector2 touchDir)
     {
         var right = touchDir.x * Speed * transform.right;
@@ -41,7 +37,6 @@ public class CharacterMove : MonoBehaviour
 
     public void Jump()// dy=0.5*g* t^2
     {
-        //isGrounded = Physics.CheckSphere(GroundChecker.position, GroundDistance, GroundMask);
 
         isGrounded = Controller.isGrounded;
 
@@ -56,10 +51,8 @@ public class CharacterMove : MonoBehaviour
         }
 
         upVelocity.y += gravity*Time.deltaTime;
-
         upVelocity = new Vector3(0, upVelocity.y, 0);
     }
-
 
 
 }
