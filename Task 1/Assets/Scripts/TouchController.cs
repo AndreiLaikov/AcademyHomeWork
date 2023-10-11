@@ -28,9 +28,11 @@ public class TouchController : MonoBehaviour
         cam.LookWithTouch(sumLookVector);
     }
 
+
     void Jump()
     {
         character.isJumping = false;
+
         Touch[] touches = Input.touches;
         for (int i = 0; i < touches.Length; i++)
         {
@@ -43,8 +45,8 @@ public class TouchController : MonoBehaviour
 
     void Drag()
     {
+
         Touch[] touches = Input.touches;
-        
         for (int i = 0; i < touches.Length; i++)
         {
 
@@ -85,5 +87,5 @@ public class TouchController : MonoBehaviour
             }
         }
     }
-   
+
 }

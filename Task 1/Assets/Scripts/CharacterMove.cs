@@ -29,7 +29,7 @@ public class CharacterMove : MonoBehaviour
     public void MoveWithTouch(Vector2 touchDir)
     {
         var right = touchDir.x * Speed * transform.right;
-        var forward = touchDir.y * Speed * transform.forward ;
+        var forward = touchDir.y * Speed * transform.forward;
         
         resultDir = right + forward + upVelocity;
         Controller.Move(resultDir * Time.deltaTime);
