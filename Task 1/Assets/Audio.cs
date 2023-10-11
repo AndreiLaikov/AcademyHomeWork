@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class Audio : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //один звук - один префаб. Настраивать в префабе каждый
+    AudioClip clip;
+    AudioSource source;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+       // AudioSource.PlayClipAtPoint - создает клип в месте касания коллайдера например и проигрывает а потом удаляется
     }
 }
