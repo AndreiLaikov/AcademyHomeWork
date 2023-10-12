@@ -12,13 +12,14 @@ public class CharController : MonoBehaviour
     private bool isJumping;
     public float jumpVelocity = 8f;
     public float minDistanceToGround = 1f;
-    private bool isGrounded;
+    [SerializeField] private bool isGrounded;
     public float animationBlendSpeed = 0.2f;
     private float targetAnimationSpeed;
 
     [SerializeField]private bool isSpawning;
     [SerializeField]private bool IsDeath;
-    [SerializeField] private LayerMask isGroundedMask;
+    [SerializeField]private LayerMask isGroundedMask;
+    [SerializeField] private bool isFighting;
 
     private Animator charAnimator;
     public Animator CharAnimator
@@ -53,6 +54,7 @@ public class CharController : MonoBehaviour
 
         Move();
         Jump();
+        Fight();
     }
 
     private void Spawn()
@@ -84,6 +86,24 @@ public class CharController : MonoBehaviour
         //isGrounded = Controller.isGrounded;
         isGrounded = Physics.CheckSphere(transform.position, 0.1f, isGroundedMask);
         Controller.Move(Vector3.up * yVelocity * Time.deltaTime);
+    }
+
+    private void Fight()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            int i = Random.Range(0, 3);
+            CharAnimator.SetInteger("ComboNum", i);
+            CharAnimator.SetTrigger("Fight");
+            isFighting = true;
+        }
+
+        CharAnimator.applyRootMotion = isFighting;
+    }
+
+    public void OnFightEnd()
+    {
+        isFighting = false;
     }
 
     private void Move()
