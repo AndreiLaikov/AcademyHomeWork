@@ -14,6 +14,14 @@ public class CharController : MonoBehaviour
 
     private bool isSprint;
 
+    [SerializeField]private float yVelocity = 0f;
+    private const float gravity = -9.81f;
+    [SerializeField]private bool isJumping;
+    public float jumpVelocity = 8f;
+    public float minDistanceToGround = 1f;
+
+    public bool isGrounded;
+
     public CharacterController Controller
     {
         get { return controller ?? GetComponent<CharacterController>(); }
@@ -27,7 +35,8 @@ public class CharController : MonoBehaviour
 
     private void Update()
     {
-
+        Move();
+        Jump();
     }
 
     private void Move()
@@ -54,8 +63,35 @@ public class CharController : MonoBehaviour
         Controller.transform.rotation = Quaternion.Lerp(currentRot, targetRot, RotationSpeed);
     }
 
+ 
+
     private void Jump()
     {
+        if (Input.GetButtonDown("Jump") && !isJumping)
+        {
+            isJumping = true;
+            yVelocity += jumpVelocity;
+        }
 
+        if (!isGrounded)
+        {
+            yVelocity += gravity * Time.deltaTime;
+        }
+        else if (yVelocity < 0f)
+        {
+            yVelocity = -1f;
+        }
+
+        if(isJumping && yVelocity < 0f)
+        {
+            RaycastHit hit;
+            if(Physics.Raycast(transform.position,Vector3.down,out hit, minDistanceToGround, LayerMask.GetMask("Default")))
+            {
+                isJumping = false;
+            }
+        }
+
+        Controller.Move(Vector3.up * yVelocity * Time.deltaTime);
+        isGrounded = Controller.isGrounded;
     }
 }
