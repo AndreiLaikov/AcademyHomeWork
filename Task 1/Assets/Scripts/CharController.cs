@@ -39,17 +39,20 @@ public class CharController : MonoBehaviour
         get { return charCamera ?? FindObjectOfType<Camera>(); }
     }
 
+    private void Start()
+    {
+    }
+
     private void Update()
     {
-        
         Gravity();
-
-        Death();
-        if (IsDeath)
-            return;
 
         Spawn();
         if (isSpawning)
+            return;
+
+        Death();
+        if (IsDeath)
             return;
 
         Move();
@@ -65,7 +68,7 @@ public class CharController : MonoBehaviour
 
     private void Death()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && !IsDeath)
         {
             CharAnimator.SetTrigger("Death");
             IsDeath = true;
