@@ -759,7 +759,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.32934132
+      - time: 0.9147287
         functionName: OnFightEnd
         data: 
         objectReferenceParameter: {instanceID: 0}

@@ -90,7 +90,7 @@ public class CharController : MonoBehaviour
 
     private void Fight()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && isGrounded)
         {
             int i = Random.Range(0, 3);
             CharAnimator.SetInteger("ComboNum", i);
