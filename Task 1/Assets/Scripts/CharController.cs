@@ -4,6 +4,8 @@ public class CharController : MonoBehaviour
 {
     public static float Speed = 1;
     public static bool isLeft;
+    private float currentSpeed;
+    private float targetSpeed;
 
     private string AnimatorSpeedMultiplier = "SpeedMultiplier";
 
@@ -18,6 +20,8 @@ public class CharController : MonoBehaviour
     private void Start()
     {
         animController = GetComponent<Animator>();
+        currentSpeed = Speed;
+        targetSpeed = Speed;
     }
 
     void OnDirectionChange()
@@ -33,15 +37,19 @@ public class CharController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Equals))
         {
-            Speed += 1;
+            targetSpeed = currentSpeed + 1;
         }
 
         if (Input.GetKeyDown(KeyCode.Minus))
         {
-            Speed -= 1;
+            targetSpeed = currentSpeed - 1;
         }
 
-        Speed = Mathf.Clamp(Speed, 1, 20);
+        targetSpeed = Mathf.Clamp(targetSpeed, 1, 20);
+        currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, 0.1f);
+
+        Speed = currentSpeed;
+
         animController.SetFloat(AnimatorSpeedMultiplier, Speed);
     }
 
