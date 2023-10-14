@@ -3,10 +3,10 @@ using UnityEngine;
 public class CharController : MonoBehaviour
 {
     
-    private SpriteRenderer renderer;
+    private SpriteRenderer _spriteRenderer;
     public SpriteRenderer Renderer
     {
-        get { return renderer ?? GetComponent<SpriteRenderer>(); }
+        get { return _spriteRenderer ?? GetComponent<SpriteRenderer>(); }
     }
 
     void OnDirectionChange()
