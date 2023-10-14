@@ -629,9 +629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9666e9290184e7ea84f4dc695d3b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 2059841356}
-  velocity: 0.2
-  isLeft: 0
+  SpeedMultiplier: 0.2
 --- !u!1 &721348620
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,9 +676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9666e9290184e7ea84f4dc695d3b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 504917529}
-  velocity: 4
-  isLeft: 0
+  SpeedMultiplier: 2
 --- !u!1 &722792221
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,9 +723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9666e9290184e7ea84f4dc695d3b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 1109596324}
-  velocity: 0.1
-  isLeft: 0
+  SpeedMultiplier: 0.1
 --- !u!1 &741510813
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,9 +770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9666e9290184e7ea84f4dc695d3b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 1510141054}
-  velocity: 3
-  isLeft: 0
+  SpeedMultiplier: 1.5
 --- !u!1 &766552683
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,9 +901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9666e9290184e7ea84f4dc695d3b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 861071183}
-  velocity: 1
-  isLeft: 0
+  SpeedMultiplier: 0.8
 --- !u!1 &861071181
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,9 +1292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9666e9290184e7ea84f4dc695d3b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 1231136750}
-  velocity: 0.5
-  isLeft: 0
+  SpeedMultiplier: 0.6
 --- !u!1 &1109596322
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,9 +1423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9666e9290184e7ea84f4dc695d3b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 1925833662}
-  velocity: 2
-  isLeft: 0
+  SpeedMultiplier: 1
 --- !u!1 &1231136748
 GameObject:
   m_ObjectHideFlags: 0
@@ -1939,9 +1925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9666e9290184e7ea84f4dc695d3b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 199085954}
-  velocity: 0.3
-  isLeft: 0
+  SpeedMultiplier: 0.4
 --- !u!1 &1818004410
 GameObject:
   m_ObjectHideFlags: 0

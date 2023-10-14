@@ -7,7 +7,8 @@ public class ParalaxMoving : MonoBehaviour
     private float leftBorder;
     private float rightBorder;
 
-    public float VelocityMultiplier = 1;
+    public float SpeedMultiplier = 1;
+    private float charSpeed;
     private bool isLeft;
 
     private Vector3 cashedPos;
@@ -24,7 +25,7 @@ public class ParalaxMoving : MonoBehaviour
 
     void Moving()
     {
-        var deltaPos = VelocityMultiplier * Vector3.right * Time.deltaTime;
+        var deltaPos = charSpeed * SpeedMultiplier * Vector3.right * Time.deltaTime;
         deltaPos = isLeft ? deltaPos : -deltaPos;
 
         transform.position += deltaPos;
@@ -47,6 +48,9 @@ public class ParalaxMoving : MonoBehaviour
 
     private void Update()
     {
+        isLeft = CharController.isLeft;
+        charSpeed = CharController.Speed;
+
         Moving();
         Paralax();
     }
