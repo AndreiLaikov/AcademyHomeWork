@@ -2,21 +2,47 @@ using UnityEngine;
 
 public class ParalaxMoving : MonoBehaviour
 {
+    private SpriteRenderer sprite;
 
-    public float velocity = 1;
-    public bool isLeft;
+    private float leftBorder;
+    private float rightBorder;
+
+    public float VelocityMultiplier = 1;
+    private bool isLeft;
+
+    private Vector3 cashedPos;
+
+    private void Start()
+    {
+        sprite = GetComponentInChildren<SpriteRenderer>();
+        
+        rightBorder = sprite.size.x / 2;
+        leftBorder = -rightBorder;
+
+        cashedPos = transform.position;
+    }
 
     void Moving()
     {
-        if (isLeft)
-            transform.position += velocity* Vector3.right * Time.deltaTime;
-        else
-            transform.position += velocity * Vector3.left * Time.deltaTime;
+        var deltaPos = VelocityMultiplier * Vector3.right * Time.deltaTime;
+        deltaPos = isLeft ? deltaPos : -deltaPos;
+
+        transform.position += deltaPos;
     }
 
     void Paralax()
     {
+        var posX = transform.position.x;
 
+        if (posX <= leftBorder)
+        {
+            transform.position = new Vector3(rightBorder, cashedPos.y, cashedPos.z);
+        }
+
+        if (posX >= rightBorder)
+        {
+            transform.position = new Vector3(leftBorder, cashedPos.y, cashedPos.z);
+        }
     }
 
     private void Update()
