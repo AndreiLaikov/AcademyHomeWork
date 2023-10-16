@@ -1,10 +1,12 @@
 using UnityEngine;
+using TMPro;
 
 public class InfinityMove : MonoBehaviour
 {
     public Transform Player;
     public float FloorHeight = 4;
     public Transform[] floors;
+
 
     private int floorCount;
 
@@ -20,6 +22,7 @@ public class InfinityMove : MonoBehaviour
             if (Player.position.y - floor.position.y > sign * 3 * FloorHeight)
             {
                 floor.position += sign * floorCount * FloorHeight * Vector3.up;
+                floor.GetComponent<FloorNumber>().IncreaseNumber(floorCount);
             }
             floor.position -= sign * FloorHeight * Vector3.up;
         }
@@ -34,6 +37,7 @@ public class InfinityMove : MonoBehaviour
             if (Player.position.y - floor.position.y < sign * 3 * FloorHeight)
             {
                 floor.position += sign * floorCount * FloorHeight * Vector3.up;
+                floor.GetComponent<FloorNumber>().DecreaseNumber(floorCount);
             }
 
             floor.position -= sign * FloorHeight * Vector3.up;
