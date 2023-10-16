@@ -23,8 +23,8 @@ public class InfinityMove : MonoBehaviour
             }
             floor.position -= sign * FloorHeight * Vector3.up;
         }
-        Player.position -= sign * FloorHeight * Vector3.up;
 
+        Player.position -= sign * FloorHeight * Vector3.up;
     }
 
     public void FloorTeleportDown(int sign)
@@ -35,13 +35,13 @@ public class InfinityMove : MonoBehaviour
             {
                 floor.position += sign * floorCount * FloorHeight * Vector3.up;
             }
+
             floor.position -= sign * FloorHeight * Vector3.up;
         }
         Player.position -= sign * FloorHeight * Vector3.up;
-
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         
         if (Player.position.y > FloorHeight)
