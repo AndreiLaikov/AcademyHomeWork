@@ -2,32 +2,58 @@ using UnityEngine;
 
 public class InfinityMove : MonoBehaviour
 {
-    public Transform Level;
     public Transform Player;
-    public float height = 4;
-
+    public float FloorHeight = 4;
+    private int floorCount;
     public Transform[] floors;
 
-    [ContextMenu ("Create")]
-    public void FloorTeleport()
+
+    private void Start()
     {
-        if (Player.localPosition.y > 4)
+        floorCount = floors.Length;
+    }
+
+    public void FloorTeleportUp()
+    {
+        if (Player.position.y > FloorHeight)
         {
             foreach (var floor in floors)
             {
-                if (Player.localPosition.y - floor.localPosition.y > 8)
+                if (Player.position.y - floor.position.y > 3 * FloorHeight)
                 {
-                    floor.localPosition += 12 * Vector3.up;
+                    floor.position += floorCount * FloorHeight * Vector3.up;
                 }
-                floor.localPosition -= 4 * Vector3.up;
+                floor.position -= FloorHeight * Vector3.up;
             }
-            Player.localPosition -= 4 * Vector3.up;
+            Player.position -= FloorHeight * Vector3.up;
         }
+    }
+
+    public void FloorTeleportDown()
+    {
+        if (Player.position.y < -FloorHeight)
+        {
+            foreach (var floor in floors)
+            {
+                if (Player.position.y - floor.position.y < -3 * FloorHeight)
+                {
+                    floor.position -= floorCount * FloorHeight * Vector3.up;
+                }
+                floor.position += FloorHeight * Vector3.up;
+            }
+            Player.position += FloorHeight * Vector3.up;
+        }
+    }
+
+    private void Teleport()
+    {
+
     }
 
     private void LateUpdate()
     {
-        FloorTeleport();
+        FloorTeleportUp();
+        FloorTeleportDown();
     }
     
 }
