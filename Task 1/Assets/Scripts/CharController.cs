@@ -7,6 +7,12 @@ public class CharController : MonoBehaviour
     private float currentSpeed;
     private float targetSpeed;
 
+    public float JumpForce;
+
+    private Rigidbody2D rb;
+    public bool isGround;
+    public bool isJumping;
+
     private string AnimatorSpeedMultiplier = "SpeedMultiplier";
 
     private SpriteRenderer _spriteRenderer;
@@ -19,6 +25,7 @@ public class CharController : MonoBehaviour
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         animController = GetComponent<Animator>();
         currentSpeed = Speed;
         targetSpeed = Speed;
@@ -57,5 +64,24 @@ public class CharController : MonoBehaviour
     {
         OnDirectionChange();
         ChangeSpeed();
+
+        Grounded();
+        Jump();
+    }
+
+    void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.W) && isGround)
+        {
+            rb.AddForce(JumpForce * Vector2.up);
+            isJumping = true;
+        }
+        animController.SetBool("isJumping", isJumping);
+    }
+
+    void Grounded()
+    {
+        isGround = rb.velocity.y == 0;
+        isJumping = rb.velocity.y != 0;
     }
 }
