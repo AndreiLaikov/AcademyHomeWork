@@ -5,7 +5,7 @@ public class LightController : MonoBehaviour
     public Light _light;
     public float min_intensity;
     public float max_intensity;
-    public AudioSource audio;
+    public AudioSource audioSource;
 
     private float timer = 0.2f;
 
@@ -21,11 +21,11 @@ public class LightController : MonoBehaviour
             timer = Random.Range(0.01f, 0.7f);
             if (_light.enabled)
             {
-                audio.Play();
+                audioSource.Play();
             }
             else
             {
-                audio.Stop();
+                audioSource.Stop();
             }
 
         }
