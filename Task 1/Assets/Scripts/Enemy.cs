@@ -3,7 +3,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public AttackSystem AttackSystem;
-
+    public float forceSize;
 
     private void Start()
     {
@@ -16,6 +16,12 @@ public class Enemy : MonoBehaviour
         {
             AttackSystem.SendDamage(collision.gameObject.GetComponent<HealthSystem>());
         }
+    }
+
+    [ContextMenu("Add")]
+    public void Forcing()
+    {
+        GetComponent<Rigidbody2D>().AddForce(transform.right * forceSize,ForceMode2D.Impulse);
     }
 
 }
