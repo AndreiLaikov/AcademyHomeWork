@@ -7,7 +7,7 @@ public class CharController : MonoBehaviour
     public float VerticalForce;
     public Transform GroundCheckerTransform;
 
-    [SerializeField]private bool isGrounded;
+    [SerializeField] private bool isGrounded;
     [SerializeField] private LayerMask mask;
 
     private Vector2 moveVector;
@@ -25,11 +25,8 @@ public class CharController : MonoBehaviour
 
     private void Move()
     {
-        if (isGrounded)
-        {
-            Vector2 velocity = new Vector2(moveVector.x * HorizontalSpeed, rBody.velocity.y);// v= m/s
-            rBody.velocity = velocity;
-        }
+        Vector2 velocity = new Vector2(moveVector.x * HorizontalSpeed, rBody.velocity.y);// v= m/s
+        rBody.velocity = velocity;
     }
 
     private void Jump()

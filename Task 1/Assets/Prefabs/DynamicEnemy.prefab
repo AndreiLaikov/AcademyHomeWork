@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6223905085257468928}
   - component: {fileID: 8823887213541816827}
   - component: {fileID: 6716966804293375698}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DynamicEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ MonoBehaviour:
   damageValue: 1
   AffectedLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
 --- !u!114 &6716966804293375698
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,11 +3,12 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public AttackSystem AttackSystem;
-    public float forceSize;
+    protected Rigidbody2D rBody;
 
-    private void Start()
+    private void Awake()
     {
         AttackSystem = GetComponent<AttackSystem>();
+        rBody = GetComponent<Rigidbody2D>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -17,11 +18,4 @@ public class Enemy : MonoBehaviour
             AttackSystem.SendDamage(collision.gameObject.GetComponent<HealthSystem>());
         }
     }
-
-    [ContextMenu("Add")]
-    public void Forcing()
-    {
-        GetComponent<Rigidbody2D>().AddForce(transform.right * forceSize,ForceMode2D.Impulse);
-    }
-
 }
