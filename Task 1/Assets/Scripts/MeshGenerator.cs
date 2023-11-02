@@ -39,6 +39,7 @@ public class MeshGenerator : MonoBehaviour
         };
     }
 
+
     private int[] GenerateTriangles()
     {
         return new int[]
@@ -68,7 +69,14 @@ public class MeshGenerator : MonoBehaviour
     {
         return new Vector2[]
         {
-
+            new Vector2(0, 0),//0
+            new Vector2(0, 1),//1
+            new Vector2(1, 0),//2
+            new Vector2(1, 1),//3
+            new Vector2(0, 1),//4
+            new Vector2(1, 1),//5
+            new Vector2(1, 0),//6
+            new Vector2(0, 1),//7
         };
     }
 
@@ -80,6 +88,7 @@ public class MeshGenerator : MonoBehaviour
         mesh.vertices = GenerateVertices();
         mesh.triangles = GenerateTriangles();
         mesh.RecalculateNormals();
+        mesh.uv = GenerateUv();
     }
     /*             4-------5
                   /       /|
