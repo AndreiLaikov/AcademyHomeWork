@@ -28,14 +28,16 @@ public class NewGenerator : MonoBehaviour
         mesh = new Mesh();
         filter.mesh = mesh;
 
-        xHalf = sizes.x / 2;
-        yHalf = sizes.y / 2;
-        zHalf = sizes.z / 2;
+
     }
 
     private void CalculateCoordinates()
     {
         vertexCoord = size * Mathf.Sqrt(2) / 2;
+
+        xHalf = sizes.x / 2;
+        yHalf = sizes.y / 2;
+        zHalf = sizes.z / 2;
 
     }
 
@@ -49,10 +51,10 @@ public class NewGenerator : MonoBehaviour
 
     private void GenerateFront()
     {
-        vert.Add(new Vector3(-1, -1, -1) * vertexCoord);//0
-        vert.Add(new Vector3(-1, 1, -1) * vertexCoord);//1
-        vert.Add(new Vector3(1, -1, -1) * vertexCoord);//2
-        vert.Add(new Vector3(1, 1, -1) * vertexCoord);//3
+        vert.Add(new Vector3(-1*xHalf, -1*yHalf, -1*zHalf));//0
+        vert.Add(new Vector3(-1*xHalf, 1*yHalf, -1*zHalf));//1
+        vert.Add(new Vector3(1*xHalf, -1*yHalf, -1*zHalf));//2
+        vert.Add(new Vector3(1*xHalf, 1*yHalf, -1*zHalf));//3
 
         triangles.Add(0);
         triangles.Add(1);
@@ -67,10 +69,10 @@ public class NewGenerator : MonoBehaviour
 
     private void GenerateTop()
     {
-        vert.Add(new Vector3(-1, 1, -1) * vertexCoord);//1 - 4
-        vert.Add(new Vector3(-1, 1, 1) * vertexCoord);//4 - 5
-        vert.Add(new Vector3(1, 1, -1) * vertexCoord);//3 - 6
-        vert.Add(new Vector3(1, 1, 1) * vertexCoord);//5 - 7
+        vert.Add(new Vector3(-1*xHalf, 1*yHalf, -1 * zHalf));//1 - 4
+        vert.Add(new Vector3(-1*xHalf, 1*yHalf, 1*zHalf));//4 - 5
+        vert.Add(new Vector3(1*xHalf, 1*yHalf, -1*zHalf));//3 - 6
+        vert.Add(new Vector3(1*xHalf, 1*yHalf, 1 * zHalf));//5 - 7
 
         triangles.Add(4);
         triangles.Add(5);
@@ -85,10 +87,10 @@ public class NewGenerator : MonoBehaviour
 
     private void GenerateBack()
     {
-        vert.Add(new Vector3(-1, -1, 1) * vertexCoord);//7 - 8
-        vert.Add(new Vector3(-1, 1, 1) * vertexCoord);//4 - 9
-        vert.Add(new Vector3(1, -1, 1) * vertexCoord);//6 - 10
-        vert.Add(new Vector3(1, 1, 1) * vertexCoord);//5 - 11
+        vert.Add(new Vector3(-1*xHalf, -1 * yHalf, 1 * zHalf));//7 - 8
+        vert.Add(new Vector3(-1*xHalf, 1*yHalf, 1* zHalf));//4 - 9
+        vert.Add(new Vector3(1*xHalf, -1*yHalf, 1* zHalf));//6 - 10
+        vert.Add(new Vector3(1*xHalf, 1 * yHalf, 1 * zHalf));//5 - 11
 
         triangles.Add(10);
         triangles.Add(11);
@@ -103,10 +105,10 @@ public class NewGenerator : MonoBehaviour
 
     private void GenerateBottom()
     {
-        vert.Add(new Vector3(-1, -1, -1) * vertexCoord);//0 - 12
-        vert.Add(new Vector3(-1, -1, 1) * vertexCoord);//7 - 13
-        vert.Add(new Vector3(1, -1, -1) * vertexCoord);//2 - 14
-        vert.Add(new Vector3(1, -1, 1) * vertexCoord);//6 - 15
+        vert.Add(new Vector3(-1*xHalf, -1*yHalf, -1 * zHalf));//0 - 12
+        vert.Add(new Vector3(-1*xHalf, -1*yHalf, 1* zHalf));//7 - 13
+        vert.Add(new Vector3(1*xHalf, -1*yHalf, -1* zHalf));//2 - 14
+        vert.Add(new Vector3(1*xHalf, -1*yHalf, 1 * zHalf));//6 - 15
 
         triangles.Add(13);
         triangles.Add(12);
@@ -122,10 +124,10 @@ public class NewGenerator : MonoBehaviour
     private void GenerateLeft()
     {
 
-        vert.Add(new Vector3(-1, -1, 1) * vertexCoord);//7 - 16 
-        vert.Add(new Vector3(-1, 1, 1) * vertexCoord);//4 - 17
-        vert.Add(new Vector3(-1, -1, -1) * vertexCoord);//0 - 18
-        vert.Add(new Vector3(-1, 1, -1) * vertexCoord);//1 - 19
+        vert.Add(new Vector3(-1*xHalf, -1 * yHalf, 1 * zHalf));//7 - 16 
+        vert.Add(new Vector3(-1*xHalf, 1 * yHalf, 1 * zHalf));//4 - 17
+        vert.Add(new Vector3(-1*xHalf, -1 * yHalf, -1 * zHalf));//0 - 18
+        vert.Add(new Vector3(-1*xHalf, 1 * yHalf, -1 * zHalf));//1 - 19
 
         triangles.Add(16);
         triangles.Add(17);
@@ -140,10 +142,10 @@ public class NewGenerator : MonoBehaviour
 
     private void GenerateRight()
     {
-        vert.Add(new Vector3(1, -1, -1) * vertexCoord);//2 -20
-        vert.Add(new Vector3(1, 1, -1) * vertexCoord);//3 - 21
-        vert.Add(new Vector3(1, -1, 1) * vertexCoord);//6 - 22
-        vert.Add(new Vector3(1, 1, 1) * vertexCoord);//5 - 23
+        vert.Add(new Vector3(1*xHalf, -1 * yHalf, -1 * zHalf));//2 -20
+        vert.Add(new Vector3(1*xHalf, 1 * yHalf, -1* zHalf));//3 - 21
+        vert.Add(new Vector3(1*xHalf, -1 * yHalf, 1* zHalf));//6 - 22
+        vert.Add(new Vector3(1*xHalf, 1 * yHalf, 1 * zHalf));//5 - 23
 
 
         triangles.Add(20);
@@ -158,7 +160,6 @@ public class NewGenerator : MonoBehaviour
     }
 
     [ContextMenu("Generate")]
-
     public void GenerateMesh()
     {
         vert = new List<Vector3>();
