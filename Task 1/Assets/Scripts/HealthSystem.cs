@@ -27,8 +27,12 @@ public class HealthSystem : MonoBehaviour
     {
         currentHealth -= damageValue;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        EventManager.SendDamage();
+
         if (currentHealth <= 0)
         {
+            EventManager.PlayerDead();
             Death();
         }
     }

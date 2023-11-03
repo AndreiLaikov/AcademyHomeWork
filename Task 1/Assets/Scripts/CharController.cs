@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CharController : MonoBehaviour
@@ -11,7 +12,6 @@ public class CharController : MonoBehaviour
     [SerializeField] private LayerMask mask;
 
     private Vector2 moveVector;
-
 
     private void Update()
     {
