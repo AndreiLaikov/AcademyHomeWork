@@ -5,9 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class NewGenerator : MonoBehaviour
 {
-    public float size;
     public Vector3 sizes;
-    private float vertexCoord;
 
     private float xHalf;
     private float yHalf;
@@ -22,18 +20,16 @@ public class NewGenerator : MonoBehaviour
     List<Vector2> uv = new List<Vector2>();
 
 
-    private void Start()
+    private void OnEnable()
     {
         filter = GetComponent<MeshFilter>();
         mesh = new Mesh();
         filter.mesh = mesh;
-
-
+        Debug.Log("Start");
     }
 
     private void CalculateCoordinates()
     {
-        vertexCoord = size * Mathf.Sqrt(2) / 2;
 
         xHalf = sizes.x / 2;
         yHalf = sizes.y / 2;
