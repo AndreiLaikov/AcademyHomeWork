@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 359667226180473317}
   - component: {fileID: 8272556770828767593}
   - component: {fileID: 4758823680198095446}
+  - component: {fileID: 238228091073659024}
+  - component: {fileID: -4498994567871264392}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -105,3 +107,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &238228091073659024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3314383314984982629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e983d75b7adf445daab0d43f6d088f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minYPos: -100
+--- !u!114 &-4498994567871264392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3314383314984982629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2bac2366869b489da2cb7b9f808d8c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

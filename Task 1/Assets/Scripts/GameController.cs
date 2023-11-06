@@ -2,77 +2,62 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    private MeshCalculator calculator;
-    private MeshGenerator generator;
-    private CuttingMeshCalculator cuttingCalculator;
     public Vector3 initialSize;
     public Vector3 initialPosition;
     public Vector3 startMovingPosition = new Vector3(-1.5f, 0, 0);
 
-    private int count;
-    private Vector3 currentSize;
+    private GameLogic logic;
+    public int Score { get; private set; }
+    public int MaxScore { get; private set; }
 
-    private Transform previousBlock;
-    private Transform currentBlock;
+    private bool isStarting;
 
     private void Start()
     {
-        currentSize = initialSize;
-        calculator = new MeshCalculator();
-        generator = GetComponent<MeshGenerator>();
-        cuttingCalculator = new CuttingMeshCalculator();
-
-        previousBlock = CreateBlock(currentSize, initialPosition);
-        RecalculateCollider(previousBlock, currentSize);
-
-        count++;
-
-        CreateMovingBlock();
+        logic = GetComponent<GameLogic>();
+        logic.Init(initialSize,initialPosition);
+        Score = logic.Count;
+        EventManager.GameStarting += OnGameStarting;
+        EventManager.PlaceSuccess += OnPlaceSuccess;
+        EventManager.GameEnding += OnGameEnding;
     }
 
-    public Transform CreateBlock(Vector3 size, Vector3 pos)
+    private void OnGameEnding()
     {
-        calculator.sizes = size;
-        calculator.CalculateMesh();
-        generator.GenerateMesh(calculator.vertices, calculator.triangles);
-        return generator.InstantiateMesh(pos);
+        if (Score>MaxScore)
+        {
+            MaxScore = Score;
+        }
+        isStarting = false;
     }
 
-    public void CreateMovingBlock()
+    private void OnPlaceSuccess(int count)
     {
-        currentBlock = CreateBlock(currentSize, startMovingPosition + Vector3.up * currentSize.y * count);
-        currentBlock.gameObject.AddComponent<MeshMover>();
-        RecalculateCollider(currentBlock, currentSize);
+        logic.CreateMovingBlock(startMovingPosition);
+        Score = count;
+    }
+
+    public void OnGameStarting()
+    {
+        logic.Init(initialSize, initialPosition);
+        Score = logic.Count;
+        logic.CreateMovingBlock(startMovingPosition);
+        isStarting = true;
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)&& isStarting)
         {
-            GenerateNewMeshes();
-            CreateMovingBlock();
+            logic.GenerateNewMeshes();
         }
     }
 
-    void GenerateNewMeshes()
+    private void OnDestroy()
     {
-        var data = cuttingCalculator.Calculate(previousBlock, currentBlock, currentSize);
-        previousBlock = CreateBlock(data.sizeStatic, data.posStatic);
-
-        var dynamicBlock = CreateBlock(data.sizeDynamic, data.posDynamic);
-        dynamicBlock.gameObject.AddComponent<Rigidbody>();
-
-        currentSize = data.sizeStatic;
-        count++;
-
-        RecalculateCollider(previousBlock, data.sizeStatic);
-        RecalculateCollider(dynamicBlock, data.sizeDynamic);
-        Destroy(currentBlock.gameObject);
-    }
-
-    void RecalculateCollider(Transform obj, Vector3 size)
-    {
-        obj.GetComponent<BoxCollider>().size = size;
+        EventManager.GameStarting -= OnGameStarting;
+        EventManager.PlaceSuccess -= OnPlaceSuccess;
+        EventManager.GameEnding -= OnGameEnding;
     }
 
 }

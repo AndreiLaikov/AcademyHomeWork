@@ -17,9 +17,9 @@ public class MeshGenerator: MonoBehaviour
         mesh.RecalculateNormals();
     }
 
-    public Transform InstantiateMesh(Vector3 position)
+    public Transform InstantiateMesh(Vector3 position, Transform parent)
     {
-        var obj = Instantiate(prefab, position, Quaternion.identity);
+        var obj = Instantiate(prefab, position, Quaternion.identity, parent);
         obj.GetComponent<MeshFilter>().mesh = mesh;
 
         return obj.transform;
