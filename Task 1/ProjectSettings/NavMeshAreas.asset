@@ -12,9 +12,9 @@ NavMeshProjectSettings:
   - name: Jump
     cost: 2
   - name: HardSurface
-    cost: 3
+    cost: 5
   - name: LightSurface
-    cost: 0.5
+    cost: 0.1
   - name: 
     cost: 1
   - name: 
