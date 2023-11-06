@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class UiController : MonoBehaviour
 {
@@ -17,10 +18,23 @@ public class UiController : MonoBehaviour
         ButtonRestart.onClick.AddListener(OnButtonRestartClick);
         ButtonRestart.gameObject.SetActive(false);
 
+        EventManager.GameStarting += OnGameStarting;
+        EventManager.GameRestarting += OnGameRestarting;
         EventManager.GameEnding += OnGameEnding;
         EventManager.PlaceSuccess += OnPlaceSuccess;
         MaxScore.text = gameController.MaxScore.ToString();
         CurrentScore.text = gameController.Score.ToString();
+    }
+
+    private void OnGameRestarting()
+    {
+        MaxScore.text = gameController.MaxScore.ToString();
+        EventManager.OnGameStarting();
+    }
+
+    private void OnGameStarting()
+    {
+        CurrentScore.text = 0.ToString();
     }
 
     private void OnPlaceSuccess(int count)
@@ -31,7 +45,6 @@ public class UiController : MonoBehaviour
     private void OnGameEnding()
     {
         ButtonRestart.gameObject.SetActive(true);
-        MaxScore.text = gameController.MaxScore.ToString();
     }
 
     private void OnButtonStartClick()
@@ -42,7 +55,7 @@ public class UiController : MonoBehaviour
 
     private void OnButtonRestartClick()
     {
-        EventManager.OnGameStarting();
+        EventManager.OnGameRestarting();
         ButtonRestart.gameObject.SetActive(false);
     }
 }
