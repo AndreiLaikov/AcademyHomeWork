@@ -7,7 +7,7 @@ public class Logic : MonoBehaviour
     public int count;
     private NewGenerator currentObject;
     private NewGenerator previousObject;
-    private Vector3 spawnPoint = new Vector3(-6, 0, 0);
+    private Vector3 spawnPoint = new Vector3(-1.5f, 0, 0);
 
     private void Start()
     {
@@ -21,7 +21,8 @@ public class Logic : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            CreateObj(currentObject.transform.position+size.y*Vector3.up, size);
+            CreateDoubleMesh();
+            CreateNewBlock();
         }
     }
 
@@ -31,17 +32,47 @@ public class Logic : MonoBehaviour
         currentObject.sizes = newSize;
         currentObject.GenerateMesh();
         count++;
-    }
-
-    private void CalculateNewSize()
-    {
-        var delta = currentObject.transform.position - previousObject.transform.position;
-        var pivot0 = previousObject.transform.position + delta / 2;
-        var pivot1 = pivot0 - (size.x / 2) * Vector3.forward;
+        currentObject.gameObject.AddComponent<MeshMover>();
     }
 
     private void CreateNewBlock()
     {
         CreateObj(spawnPoint + Vector3.up * size.y * count, size);
     }
+
+    void CreateDoubleMesh()
+    {
+        var deltaX = currentObject.transform.position.x - previousObject.transform.position.x;
+        var sign = Mathf.Sign(deltaX);
+
+        var pivot0 = previousObject.transform.position.x + deltaX / 2;
+        var pivot1 = previousObject.transform.position.x + sign * size.x / 2 + deltaX / 2;
+
+        var pos0 = new Vector3(pivot0, currentObject.transform.position.y, currentObject.transform.position.z);
+        var pos1 = new Vector3(pivot1, currentObject.transform.position.y, currentObject.transform.position.z);
+
+        var newSize0 = size.x - Mathf.Abs(deltaX);
+        var newSize1 = Mathf.Abs(deltaX);
+
+        if (newSize0 < 0)
+        {
+            Debug.Log("Min");
+            return;
+        }
+
+        previousObject = Instantiate(generator, pos0, Quaternion.identity);
+        previousObject.sizes = new Vector3(newSize0, size.y, size.z);
+        previousObject.GenerateMesh();
+
+        var fallingObject = Instantiate(generator, pos1, Quaternion.identity);
+        fallingObject.sizes = new Vector3(newSize1, size.y, size.z);
+        fallingObject.GenerateMesh();
+        fallingObject.gameObject.AddComponent<Rigidbody>();
+
+        size = previousObject.sizes;
+
+        Destroy(currentObject.gameObject);
+
+    }
+
 }

@@ -25,7 +25,6 @@ public class NewGenerator : MonoBehaviour
         filter = GetComponent<MeshFilter>();
         mesh = new Mesh();
         filter.mesh = mesh;
-        Debug.Log("Start");
     }
 
     private void CalculateCoordinates()

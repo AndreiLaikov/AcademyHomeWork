@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class MeshMover : MonoBehaviour
 {
-    public float velocity;
-    public float distance;
+    public float velocity =1;
+    public float distance=3;
     public bool isMoving = true;
 
     public float targetPosX;
-    private float time = 0;
+    private float time;
     private Vector3 startPos;
 
     private void Start()
