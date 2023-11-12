@@ -1,28 +1,30 @@
 using UnityEngine;
 using StackApp.Generators;
-using System.Collections.Generic;
 
-namespace StackApp.Block
+namespace StackApp.Blocks
 {
-    public class Block : MonoBehaviour
+    public class Block: BlockElement
     {
-        private GameConfigurationDataBlock configuration;
-        private BlockCalculator calculator;
+        public Vector3 BlockSize;
+        private GameConfigurationDataBlock config;
         private BlockGenerator generator;
 
-        private BlockElement block;
-
-        public void SpawnBlock(Vector3 size, Transform parent)
+        public Block(GameConfigurationDataBlock blockConfiguration)
         {
-            List<Vector3> vertices;
-            List<int> triangles;
+            config = blockConfiguration;
+            generator = new BlockGenerator();
+        }
 
-            calculator.CalculateMesh(size, out vertices, out triangles);
+        public Block SpawnBlock(Vector3 size, Vector3 position,Color color)
+        {
+            BlockSize = size;
 
-            block = Instantiate(configuration.blockPrefab, configuration.InitialPosition, Quaternion.identity, parent);
-
-            block.BlockMesh.mesh = generator.GenerateBlock(vertices, triangles);
+            var block = Instantiate(config.BlockPrefab, position, Quaternion.identity, config.BlocksParentTransform);
+            block.BlockMesh.mesh = generator.GenerateBlock(size);
             block.BlockCollider.size = size;
+            block.BlockMaterial.color = color;
+
+            return block;
         }
     }
 }

@@ -1,45 +1,32 @@
-using System.Collections.Generic;
-using StackApp.Block;
+using StackApp.Blocks;
 using UnityEngine;
 
 namespace StackApp.World
 {
-    public class World : MonoBehaviour
+    public class World
     {
-        private GameConfigurationDataWorld worldConfiguration;
-        private GameConfigurationDataBlock blockConfiguration;
-        private BlockElement worldElement;
-        private Generators.BlockCalculator calculator;
-        private Generators.BlockGenerator generator;
+        private GameConfigurationDataBlock blockConfig;
+        private GameConfigurationDataWorld worldConfig;
+        public Block worldBlock;
 
-        public void Initialize(GameConfigurationDataWorld worldConfig, GameConfigurationDataBlock blockConfig)
+        public void Initialize(GameConfigurationDataBlock blockConfiguration, GameConfigurationDataWorld worldConfiguration)
         {
-            worldConfiguration = worldConfig;
-            blockConfiguration = blockConfig;
-            calculator = new Generators.BlockCalculator();
-            generator = new Generators.BlockGenerator();
-
-            SpawnWorld(worldConfiguration.WorldParentTransform);
+            blockConfig = blockConfiguration;
+            worldConfig = worldConfiguration;
+            SpawnWorld();//create a start big block in StartingBoxPos 
         }
 
-        private Vector3 CalculateSize()
+        private void SpawnWorld()
         {
-            var sizeY = Mathf.Abs(worldConfiguration.StartingBoxPosition.y * 2 + blockConfiguration.InitialSize.y / 2);
-            return new Vector3(blockConfiguration.InitialSize.x, sizeY, blockConfiguration.InitialSize.z);
+            worldBlock = new Block(blockConfig);
+            worldBlock = worldBlock.SpawnBlock(CalculateSize(), blockConfig.StartingBoxPosition, worldConfig.initialColor);
+            worldBlock.name = "World";
         }
 
-        public void SpawnWorld(Transform parent)
+        private Vector3 CalculateSize()//Calculate size of world box by length and width = InitialSize and height = 2*Y - (blocks height)/2
         {
-            List<Vector3> vertices;
-            List<int> triangles;
-            Vector3 size = CalculateSize();
-
-            calculator.CalculateMesh(size,out vertices,out triangles);
-
-            worldElement = Instantiate(blockConfiguration.blockPrefab, worldConfiguration.StartingBoxPosition, Quaternion.identity, parent);
-
-            worldElement.BlockMesh.mesh = generator.GenerateBlock(vertices, triangles);
-            worldElement.BlockCollider.size = size;
+            var sizeY = Mathf.Abs(blockConfig.StartingBoxPosition.y * 2) - blockConfig.InitialSize.y / 2;
+            return new Vector3(blockConfig.InitialSize.x, sizeY, blockConfig.InitialSize.z);
         }
     }
 }
