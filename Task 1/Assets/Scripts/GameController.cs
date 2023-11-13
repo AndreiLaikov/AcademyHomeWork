@@ -1,77 +1,97 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using StackApp.Tower;
 
-public class GameController : MonoBehaviour
+namespace StackApp
 {
-    public Vector3 initialSize;
-    public Vector3 initialPosition;
-    public Vector3 startingBoxPosition;
-    public Vector3 startMovingPosition = new Vector3(-1.5f, 0, 0);
-
-    private GameLogic logic;
-    private Camera cam;
-    private Vector3 cameraStartPos;
-    public int Score { get; private set; }
-    public int MaxScore { get; private set; }
-
-    private bool isStarting;
-
-    private void Start()
+    public class GameController : MonoBehaviour
     {
-        logic = GetComponent<GameLogic>();
-        logic.Init(initialSize,initialPosition);
+        [SerializeField] private UI.UiController uiController;
+        [SerializeField] private GameConfigurationData configuration;
+        private World.World world;
+        private BlocksController blocksController;
+        private Player.Player player;
+        private PlayerInput input;
+        private TowerCreator tower;
+        private CameraController.CameraController cameraController;
+        private Transform blocksParentTransform;
 
-        var posY = Mathf.Abs(startingBoxPosition.y*2 + initialSize.y / 2);
-        logic.GenerateStartingBox(new Vector3(initialSize.x, posY,initialSize.z),startingBoxPosition);
-
-        Score = logic.Count;
-        EventManager.GameStarting += OnGameStarting;
-        EventManager.PlaceSuccess += OnPlaceSuccess;
-        EventManager.GameEnding += OnGameEnding;
-        cam = Camera.main;
-        cameraStartPos = cam.transform.position;
-    }
-
-    private void OnGameEnding()
-    {
-        if (Score>MaxScore)
+        private void Start()
         {
-            MaxScore = Score;
+            player = gameObject.AddComponent<Player.Player>();
+            cameraController = gameObject.AddComponent<CameraController.CameraController>();
+            cameraController.Initialization(configuration.WorldConfiguration, configuration.BlockConfiguration);
+
+            InitGame();
+            EventController.OnGameStarting += StartGame;
+            EventController.OnGameRestarting += RestartGame;
+            EventController.OnBlockRightPlacing += OnBlockRightPlacing;
+            EventController.OnBlockWrongPlacing += OnBlockWrongPlacing;
         }
-        isStarting = false;
-    }
 
-    private void OnPlaceSuccess(int count)
-    {
-        logic.CreateMovingBlock(startMovingPosition);
-        Score = count;
-        cam.transform.position += Vector3.up * initialSize.y;
-    }
-
-    public void OnGameStarting()
-    {
-        logic.Init(initialSize, initialPosition);
-        Score = logic.Count;
-        var posY = Mathf.Abs(startingBoxPosition.y * 2 + initialSize.y / 2);
-        logic.GenerateStartingBox(new Vector3(initialSize.x, posY, initialSize.z), startingBoxPosition);
-
-        logic.CreateMovingBlock(startMovingPosition);
-        isStarting = true;
-        cam.transform.position = cameraStartPos;
-    }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0)&& isStarting)
+        private void InitGame()
         {
-            logic.GenerateNewMeshes();
+            blocksParentTransform = new GameObject("[World]").transform;
+            configuration.BlockConfiguration.BlocksParentTransform = blocksParentTransform;
+
+            world = new World.World();
+            world.Initialize(configuration.BlockConfiguration);
+
+            blocksController = gameObject.AddComponent<BlocksController>();
+            blocksController.Initialize(configuration, world.worldBlock);
+
+            tower = new TowerCreator();
+            tower.Initialize(configuration.BlockConfiguration, blocksController);
+
+            player.Initialize(tower);
+            uiController.Initialize(player);
+        }
+
+        private void StartGame()
+        {
+            blocksController.GenerateMovingBlock(configuration.BlockConfiguration.InitialPosition);
+
+            input = new PlayerInput();
+            input.Enable();
+            input.Player.Tap.performed += TapPerformed;
+        }
+
+        private void RestartGame()
+        {
+            RemoveInitComponents();
+            InitGame();
+        }
+
+        private void RemoveInitComponents()
+        {
+            Destroy(blocksParentTransform.gameObject);
+            Destroy(player);
+            Destroy(blocksController);
+        }
+
+        private void OnBlockWrongPlacing()
+        {
+            input.Disable();
+            uiController.ShowRestartUi();
+        }
+
+        private void OnBlockRightPlacing()
+        {
+            player.AddScore();
+            uiController.ChangeScore();
+        }
+
+        private void TapPerformed(InputAction.CallbackContext obj)
+        {
+            tower.TryToCreate();
+        }
+
+        private void OnDestroy()
+        {
+            EventController.OnGameStarting -= StartGame;
+            EventController.OnGameRestarting -= RestartGame;
+            EventController.OnBlockRightPlacing -= OnBlockRightPlacing;
+            EventController.OnBlockWrongPlacing -= OnBlockWrongPlacing;
         }
     }
-
-    private void OnDestroy()
-    {
-        EventManager.GameStarting -= OnGameStarting;
-        EventManager.PlaceSuccess -= OnPlaceSuccess;
-        EventManager.GameEnding -= OnGameEnding;
-    }
-
 }

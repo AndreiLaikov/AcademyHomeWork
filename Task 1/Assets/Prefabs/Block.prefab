@@ -50,7 +50,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockMesh: {fileID: -4051542719993181188}
   blockCollider: {fileID: 7778153265608917751}
-  blockMaterial: {fileID: 2100000, guid: 0c0a61eddebca4f8c8192b0742500648, type: 2}
+  rBody: {fileID: -928860788924082205}
+  blockRenderer: {fileID: -6217004270450129608}
 --- !u!33 &-4051542719993181188
 MeshFilter:
   m_ObjectHideFlags: 0
