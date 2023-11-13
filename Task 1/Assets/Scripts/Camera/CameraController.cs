@@ -11,12 +11,13 @@ namespace StackApp.CameraController
        
         public void Initialization(GameConfigurationDataWorld worldConfiguration, GameConfigurationDataBlock blockConfiguration)
         {
-            camera = Camera.main;
             worldConfig = worldConfiguration;
             blockConfig = blockConfiguration;
+
+            camera = Camera.main;
             camera.transform.position = worldConfig.CameraStartPosition;
             camera.transform.rotation = Quaternion.Euler(worldConfig.CameraStartRotation);
-            EventController.OnGameStarting += GameStarting;
+
             EventController.OnGameRestarting += OnGameRestarting;
             EventController.OnBlockRightPlacing += OnBlockRightPlacing;
         }
@@ -41,9 +42,10 @@ namespace StackApp.CameraController
             StartCoroutine(CameraMove(worldConfig.CameraStartPosition));
         }
 
-        private void GameStarting()
+        private void OnDestroy()
         {
-           
+            EventController.OnGameRestarting -= OnGameRestarting;
+            EventController.OnBlockRightPlacing -= OnBlockRightPlacing;
         }
     }
 }
