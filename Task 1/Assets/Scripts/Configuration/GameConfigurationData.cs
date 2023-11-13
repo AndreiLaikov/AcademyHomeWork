@@ -35,6 +35,7 @@ namespace StackApp
     {
         public Vector3 CameraStartPosition; //Initial Camera position
         public Vector3 CameraStartRotation; //Initial Camera rotation
-        public float CameraSpeed; //Initial Camera rotation
+        public float CameraSpeed; //Camera speed for move between blocks
+        public float CameraRestartingSpeed; //Camera speed for return to start position
     }
 }

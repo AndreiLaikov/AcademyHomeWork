@@ -21,6 +21,7 @@ namespace StackApp.Tower
             if (blocksController.IsBlockCutting())
             {
                 CreateBlocks();
+                EventController.PlaceRight();
             }
             else
             {
@@ -35,8 +36,6 @@ namespace StackApp.Tower
             blocksController.GenerateBlocks();
             blocksController.SetColor(CalculateColor());
             blocksController.GenerateMovingBlock(PositionCalculate());
-
-            EventController.PlaceRight();
         }
 
         private Vector3 PositionCalculate()

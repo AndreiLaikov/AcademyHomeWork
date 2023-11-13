@@ -10,7 +10,7 @@ namespace StackApp.Blocks
         [SerializeField] private BoxCollider blockCollider;
         public BoxCollider BlockCollider => blockCollider;
 
-        [SerializeField] private Rigidbody rBody;//todo is it OK to add rigid body with isKinematic=true or better addComponent only to falling block?
+        [SerializeField] private Rigidbody rBody;//todo is it OK to add rigidbody with isKinematic=true or better addComponent only to falling block?
         public Rigidbody RBody => rBody;
 
         [SerializeField] private MeshRenderer blockRenderer;

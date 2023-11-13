@@ -5,7 +5,7 @@ namespace StackApp.CameraController
 {
     public class CameraController : MonoBehaviour
     {
-        private Camera camera;
+        private Camera playerCamera;
         private GameConfigurationDataWorld worldConfig;
         private GameConfigurationDataBlock blockConfig;
        
@@ -14,32 +14,32 @@ namespace StackApp.CameraController
             worldConfig = worldConfiguration;
             blockConfig = blockConfiguration;
 
-            camera = Camera.main;
-            camera.transform.position = worldConfig.CameraStartPosition;
-            camera.transform.rotation = Quaternion.Euler(worldConfig.CameraStartRotation);
+            playerCamera = Camera.main;
+            playerCamera.transform.position = worldConfig.CameraStartPosition;
+            playerCamera.transform.rotation = Quaternion.Euler(worldConfig.CameraStartRotation);
 
             EventController.OnGameRestarting += OnGameRestarting;
             EventController.OnBlockRightPlacing += OnBlockRightPlacing;
         }
 
-        private IEnumerator CameraMove(Vector3 target)
+        private IEnumerator CameraMove(Vector3 target, float speed)
         {
-            while (Vector3.Distance(camera.transform.position, target) > float.Epsilon)
+            while (Vector3.Distance(playerCamera.transform.position, target) > float.Epsilon)
             {
-                camera.transform.position = Vector3.MoveTowards(camera.transform.position, target, worldConfig.CameraSpeed * Time.deltaTime);
+                playerCamera.transform.position = Vector3.MoveTowards(playerCamera.transform.position, target, speed * Time.deltaTime);
                 yield return null;
             }
         }
 
         private void OnBlockRightPlacing()
         {
-            var target = camera.transform.position + Vector3.up * blockConfig.InitialSize.y;
-            StartCoroutine(CameraMove(target));
+            var target = playerCamera.transform.position + Vector3.up * blockConfig.InitialSize.y;
+            StartCoroutine(CameraMove(target, worldConfig.CameraSpeed));
         }
 
         private void OnGameRestarting()
         {
-            StartCoroutine(CameraMove(worldConfig.CameraStartPosition));
+            StartCoroutine(CameraMove(worldConfig.CameraStartPosition, worldConfig.CameraRestartingSpeed));
         }
 
         private void OnDestroy()

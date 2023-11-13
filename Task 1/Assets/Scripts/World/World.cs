@@ -11,7 +11,7 @@ namespace StackApp.World
         public void Initialize(GameConfigurationDataBlock blockConfiguration)
         {
             blockConfig = blockConfiguration;
-            SpawnWorld();//create a start big block in StartingBoxPos 
+            SpawnWorld();
         }
 
         private void SpawnWorld()

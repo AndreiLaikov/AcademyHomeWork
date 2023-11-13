@@ -34,7 +34,7 @@ namespace StackApp
             blocksParentTransform = new GameObject("[World]").transform;
             configuration.BlockConfiguration.BlocksParentTransform = blocksParentTransform;
 
-            world = new World.World();
+            world = gameObject.AddComponent<World.World>();
             world.Initialize(configuration.BlockConfiguration);
 
             blocksController = gameObject.AddComponent<BlocksController>();
@@ -67,6 +67,7 @@ namespace StackApp
             Destroy(blocksParentTransform.gameObject);
             Destroy(player);
             Destroy(blocksController);
+            Destroy(world);
         }
 
         private void OnBlockWrongPlacing()
