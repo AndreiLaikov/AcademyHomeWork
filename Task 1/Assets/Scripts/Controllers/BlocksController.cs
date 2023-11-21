@@ -8,7 +8,6 @@ namespace StackApp
     {
         private GameConfigurationDataBlock blockConfig;
         private GameConfigurationDataMover moverConfig;
-        private CuttingCalculator cuttingCalculator;
         private CuttingCalculator.MeshesData calculateData;
 
         private Block currentMovingBlock;
@@ -21,7 +20,6 @@ namespace StackApp
             blockConfig = configuration.BlockConfiguration;
             moverConfig = configuration.MoverConfiguration;
 
-            cuttingCalculator = new CuttingCalculator();
             currentPlayableBlock = startingBlock;
             currentPlayableSize = blockConfig.InitialSize;
             calculateData = new CuttingCalculator.MeshesData();
@@ -40,7 +38,7 @@ namespace StackApp
 
         public bool IsBlockCutting()
         {
-            calculateData = cuttingCalculator.Calculate(currentPlayableBlock.transform, currentMovingBlock.transform, currentPlayableSize);
+            calculateData = CuttingCalculator.Calculate(currentPlayableBlock.transform, currentMovingBlock.transform, currentPlayableSize);
             return calculateData.PlayableSize.x > 0;
         }
 

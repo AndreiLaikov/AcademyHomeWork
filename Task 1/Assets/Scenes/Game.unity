@@ -477,6 +477,10 @@ PrefabInstance:
       propertyPath: uiController
       value: 
       objectReference: {fileID: 8861691916759549453}
+    - target: {fileID: 9172473522177034538, guid: edbc05a374558441dadb36d66ba4e298, type: 3}
+      propertyPath: configuration.MoverConfiguration.Speed
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

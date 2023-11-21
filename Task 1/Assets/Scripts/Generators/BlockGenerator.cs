@@ -13,7 +13,6 @@ namespace StackApp.Generators
         private List<Vector3> vertices = new(vertexCount);
         private List<int> triangles = new(triangleCount);
 
-
         public Mesh GenerateBlock(Vector3 size)
         {
             CalculateCoordinates(size);

@@ -1,12 +1,14 @@
 using UnityEngine;
-
-public class BlockDestroyer : MonoBehaviour
+namespace StackApp.Blocks
 {
-    private void Update()
+    public class BlockDestroyer : MonoBehaviour
     {
-        if (transform.position.y < -100)// Destroy falling blocks
+        private void Update()
         {
-            Destroy(gameObject);
+            if (transform.position.y < -100)// Destroy falling blocks
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

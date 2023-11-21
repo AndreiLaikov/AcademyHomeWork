@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace StackApp.Generators
 {
-    public class CuttingCalculator
+    public static class CuttingCalculator
     {
         public struct MeshesData
         {
@@ -12,7 +12,7 @@ namespace StackApp.Generators
             public Vector3 FallingSize;
         }
 
-        public MeshesData Calculate(Transform playableBlock, Transform movingBlock, Vector3 currentBlockSize)
+        public static MeshesData Calculate(Transform playableBlock, Transform movingBlock, Vector3 currentBlockSize)
         {
             MeshesData data = new MeshesData();
             var deltaX = movingBlock.transform.position.x - playableBlock.transform.position.x;

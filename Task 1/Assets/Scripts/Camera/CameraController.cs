@@ -9,7 +9,7 @@ namespace StackApp.CameraController
         private GameConfigurationDataWorld worldConfig;
         private GameConfigurationDataBlock blockConfig;
        
-        public void Initialization(GameConfigurationDataWorld worldConfiguration, GameConfigurationDataBlock blockConfiguration)
+        public void Initialize(GameConfigurationDataWorld worldConfiguration, GameConfigurationDataBlock blockConfiguration)
         {
             worldConfig = worldConfiguration;
             blockConfig = blockConfiguration;

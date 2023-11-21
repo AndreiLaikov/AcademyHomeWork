@@ -20,7 +20,7 @@ namespace StackApp
         {
             player = gameObject.AddComponent<Player.Player>();
             cameraController = gameObject.AddComponent<CameraController.CameraController>();
-            cameraController.Initialization(configuration.WorldConfiguration, configuration.BlockConfiguration);
+            cameraController.Initialize(configuration.WorldConfiguration, configuration.BlockConfiguration);
 
             InitGame();
             EventController.OnGameStarting += StartGame;

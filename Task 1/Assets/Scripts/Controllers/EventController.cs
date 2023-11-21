@@ -1,6 +1,6 @@
 using System;
 
-public class EventController
+public static class EventController
 {
     public static event Action OnGameStarting;
     public static event Action OnGameRestarting;
