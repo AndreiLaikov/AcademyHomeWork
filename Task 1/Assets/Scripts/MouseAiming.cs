@@ -18,9 +18,10 @@ public class MouseAiming : MonoBehaviour
         xRot -= Input.GetAxis("Mouse Y") * xSensitive;
         xRot = Mathf.Clamp(xRot, -40, 10);
 
+        yRot = rBody.rotation.eulerAngles.y;
         yRot += Input.GetAxis("Mouse X") * ySensitive;
 
-        transform.rotation = Quaternion.Euler(xRot, yRot, 0);
+        rBody.rotation = Quaternion.Euler(xRot, yRot, 0);
     }
 
     private void Update()
