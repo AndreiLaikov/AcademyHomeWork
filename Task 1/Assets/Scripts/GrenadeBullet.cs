@@ -1,20 +1,10 @@
-
 using UnityEngine;
 
-public class GrenadeBullet : MonoBehaviour
+public class GrenadeBullet : Bullet
 {
-    public float force;
     public float power;
     public float radius;
     public LayerMask mask;
-
-    private Rigidbody rBody;
-
-    public void Start()
-    {
-        rBody = GetComponent<Rigidbody>();
-        rBody.AddForce(transform.forward * force);
-    }
 
     private void Explode()
     {    
@@ -28,10 +18,9 @@ public class GrenadeBullet : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    protected override void OnCollisionEnter(Collision collision)
     {
+        base.OnCollisionEnter(collision);
         Explode();
-        Destroy(gameObject);
     }
-
 }

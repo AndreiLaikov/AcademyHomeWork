@@ -146,5 +146,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dc6bf9d0e84244a7a58c46124ac56df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 300
-  timeToLive: 20
+  Force: 300
+  TimeToLive: 5

@@ -1,27 +1,9 @@
 using UnityEngine;
 
-public class TennisBullet : MonoBehaviour
+public class TennisBullet : Bullet
 {
-    public float force;
-    public float timeToLive = 50;
-
-    private Rigidbody rBody;
-
-    public void Start()
+    protected override void OnCollisionEnter(Collision collision)
     {
-        rBody = GetComponent<Rigidbody>();
-        rBody.AddForce(transform.forward * force);
-    }
-
-    public void Update()
-    {
-        timeToLive -= Time.deltaTime;
-        if (timeToLive <= 0)
-            BulletDestroy();
-    }
-
-    private void BulletDestroy()
-    {
-        Destroy(gameObject);
+        
     }
 }
