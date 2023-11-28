@@ -115,7 +115,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2031562136035781534}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -146,9 +146,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7082cfd33aa26445d83d9a72ad8375b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Force: 1000
+  Effect: {fileID: 19800002, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
+  Force: 40
   TimeToLive: 5
-  power: 200
+  power: 500
   radius: 20
   mask:
     serializedVersion: 2

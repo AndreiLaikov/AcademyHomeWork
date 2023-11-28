@@ -2,15 +2,17 @@ using UnityEngine;
 
 public abstract class Bullet : MonoBehaviour
 {
+    public ParticleSystem Effect;
+
     public float Force;
-    public float TimeToLive = 5;
+    public float TimeToLive;
 
     private Rigidbody rBody;
 
     private void Start()
     {
         rBody = GetComponent<Rigidbody>();
-        rBody.AddForce(transform.forward * Force);
+        rBody.AddForce(transform.forward * Force, ForceMode.Impulse);
     }
 
     protected void BulletDestroy()
@@ -20,6 +22,7 @@ public abstract class Bullet : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
+        Instantiate(Effect, transform.position, Quaternion.identity);
         BulletDestroy();
     }
 
@@ -27,7 +30,9 @@ public abstract class Bullet : MonoBehaviour
     {
         TimeToLive -= Time.deltaTime;
         if (TimeToLive <= 0)
+        {
             BulletDestroy();
+        }
     }
 
     private void Update()

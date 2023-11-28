@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2668541761073539113}
   - component: {fileID: 4503370640683134975}
   - component: {fileID: 16562471697167220}
-  - component: {fileID: 4118890994888009552}
+  - component: {fileID: 1954107640717397258}
   m_Layer: 6
   m_Name: Robot
   m_TagString: Untagged
@@ -160,8 +160,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bType: 0
---- !u!136 &4118890994888009552
-CapsuleCollider:
+--- !u!65 &1954107640717397258
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -178,10 +178,8 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1.27
-  m_Direction: 0
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2957487775192184234
 GameObject:
