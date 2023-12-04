@@ -7,12 +7,14 @@ public class CharController : MonoBehaviour
     public float RotationSpeed = 0.1f;
     private float rotationAngle = 0f;
     private bool isSprint;
-    private float yVelocity = 0f;
+    public float yVelocity = 0f;
     private const float gravity = -9.81f;
     public float jumpVelocity = 8f;
     [SerializeField] private bool isGrounded;
     public float animationBlendSpeed = 0.2f;
     private float targetAnimationSpeed;
+    public float GroundCheckDistance;
+    public Forcer forcer;
 
     [SerializeField]private bool IsDeath;
     [SerializeField]private LayerMask isGroundedMask;
@@ -55,7 +57,7 @@ public class CharController : MonoBehaviour
         Move();
         Jump();
     }
-
+    
 
     private void Death()
     {
@@ -72,12 +74,12 @@ public class CharController : MonoBehaviour
         {
             yVelocity += gravity * Time.deltaTime;
         }
-        else if (yVelocity < 0f)
+        else
         {
-            yVelocity = -1f;
+            yVelocity = Controller.velocity.y;
         }
-        //isGrounded = Controller.isGrounded;
-        isGrounded = Physics.CheckSphere(transform.position, 0.2f, isGroundedMask);
+
+        isGrounded = Physics.CheckSphere(transform.position, GroundCheckDistance, isGroundedMask);
         Controller.Move(Vector3.up * yVelocity * Time.deltaTime);
     }
 
@@ -120,6 +122,9 @@ public class CharController : MonoBehaviour
         {
             yVelocity += jumpVelocity;
             CharAnimator.SetTrigger("Jump");
+
+            forcer.AddForce();
         }
     }
+
 }
