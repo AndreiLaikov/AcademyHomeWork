@@ -12,6 +12,11 @@ public abstract class Bullet : MonoBehaviour
     private void Start()
     {
         rBody = GetComponent<Rigidbody>();
+        Shoot();
+    }
+
+    protected virtual void Shoot()
+    {
         rBody.AddForce(transform.forward * Force, ForceMode.Impulse);
     }
 

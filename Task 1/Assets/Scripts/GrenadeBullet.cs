@@ -16,11 +16,19 @@ public class GrenadeBullet : Bullet
             if (rb != null)
                 rb.AddExplosionForce(power, explosionPos, radius);
         }
+
+        AudioManager.Instance.GrenadeExplosion(explosionPos);
     }
 
     protected override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
         Explode();
+    }
+
+    protected override void Shoot()
+    {
+        base.Shoot();
+        AudioManager.Instance.GrenadeShoot();
     }
 }
