@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1150957534826728595}
   - component: {fileID: 1145692221843450265}
   - component: {fileID: 359761563042896250}
+  - component: {fileID: -363660139041801801}
   m_Layer: 7
   m_Name: TennisBullet
   m_TagString: Untagged
@@ -149,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Effect: {fileID: 0}
   trail: {fileID: 359761563042896250}
+  currentBulletType: {fileID: 0}
   Force: 5
   TimeToLive: 50
 --- !u!96 &359761563042896250
@@ -264,3 +266,16 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &-363660139041801801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569253934990409840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cfd12d18601140b19814b3806a667ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bType: 3

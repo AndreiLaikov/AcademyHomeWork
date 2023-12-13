@@ -21,13 +21,12 @@ public class GrenadeBullet : Bullet
     protected override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
-        AudioManager.Instance.GrenadeExplosion(transform.position);
         Explode();
+        BulletDestroy();
     }
 
     protected override void Shoot()
     {
         base.Shoot();
-        AudioManager.Instance.GrenadeShoot();
     }
 }

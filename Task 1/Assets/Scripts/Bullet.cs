@@ -5,6 +5,7 @@ public abstract class Bullet : MonoBehaviour
     public ParticleSystem Effect;
     public TrailRenderer trail;
 
+    public BulletType currentBulletType;
     public float Force;
     public float TimeToLive;
 
@@ -12,16 +13,16 @@ public abstract class Bullet : MonoBehaviour
 
     private Rigidbody rBody;
 
+
     private void Awake()
     {
         rBody = GetComponent<Rigidbody>();
         trail.GetComponent<TrailRenderer>();
+        currentBulletType = GetComponent<BulletType>();
     }
 
     private void OnEnable()
     {
-        Debug.Log(transform.position);
-        Debug.Log(transform.rotation);
         Shoot();
         timeToLive = TimeToLive;
     }
@@ -44,8 +45,8 @@ public abstract class Bullet : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
+        AudioManager.Instance.PlayHitSound(currentBulletType, transform.position);
         Instantiate(Effect, transform.position, Quaternion.identity);
-        BulletDestroy();
     }
 
     protected virtual void AutoDestroy()

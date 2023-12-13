@@ -16,7 +16,7 @@ public class RobotShooter : MonoBehaviour
 
     public void BulletShoot(string name)
     {
-        //Instantiate(bulletPrefab, gunPosition.position, gunPosition.rotation);
+        AudioManager.Instance.PlayShootSound(currentBullet);
         BulletsPull.Instance.GetObject(name, gunTransform.position, gunTransform.rotation);
     }
 

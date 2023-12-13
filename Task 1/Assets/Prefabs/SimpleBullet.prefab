@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -3339870722802689905}
   - component: {fileID: 7058895619539226338}
   - component: {fileID: 806027413139104317}
+  - component: {fileID: -6119468556052900892}
   m_Layer: 7
   m_Name: SimpleBullet
   m_TagString: Untagged
@@ -149,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Effect: {fileID: 19800002, guid: 00fedc70b62a31e448e8ccc298257b56, type: 3}
   trail: {fileID: 806027413139104317}
+  currentBulletType: {fileID: 0}
   Force: 10
   TimeToLive: 5
 --- !u!96 &806027413139104317
@@ -264,3 +266,16 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &-6119468556052900892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2533927617075069382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cfd12d18601140b19814b3806a667ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bType: 1

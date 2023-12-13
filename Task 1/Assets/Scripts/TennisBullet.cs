@@ -4,12 +4,6 @@ public class TennisBullet : Bullet
 {
     protected override void OnCollisionEnter(Collision collision)
     {
-        AudioManager.Instance.TennisHit(transform.position);
-    }
-
-    protected override void Shoot()
-    {
-        base.Shoot();
-        AudioManager.Instance.TennisShoot();
+        AudioManager.Instance.PlayHitSound(currentBulletType, transform.position);
     }
 }

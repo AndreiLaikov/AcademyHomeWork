@@ -18,35 +18,36 @@ public class AudioManager : Singleton<AudioManager>
     public AudioClip TennisShootAudio;
     public AudioClip TennisHitAudio;
 
-
-    public void BulletShoot()
+    public void PlayShootSound(BulletType bulletType)
     {
-        audioSource.PlayOneShot(BulletShootAudio);
+        switch (bulletType.bType)
+        {
+            case BulletType.bTypes.Simple:
+                audioSource.PlayOneShot(BulletShootAudio);
+                break;
+            case BulletType.bTypes.Grenade:
+                audioSource.PlayOneShot(GrenadeShootAudio);
+                break;
+            case BulletType.bTypes.Tennis:
+                audioSource.PlayOneShot(TennisShootAudio);
+                break;
+        }
     }
 
-    public void BulletHit(Vector3 pos)
+    public void PlayHitSound(BulletType bulletType, Vector3 position)
     {
-        CreateAudio(pos, BulletHitAudio);
-    }
-
-    public void GrenadeShoot()
-    {
-        audioSource.PlayOneShot(GrenadeShootAudio);
-    }
-
-    public void GrenadeExplosion(Vector3 pos)
-    {
-        CreateAudio(pos, GrenadeExplosionAudio);
-    }
-
-    public void TennisShoot()
-    {
-        audioSource.PlayOneShot(TennisShootAudio);
-    }
-
-    public void TennisHit(Vector3 pos)
-    {
-        CreateAudio(pos, TennisHitAudio);
+        switch (bulletType.bType)
+        {
+            case BulletType.bTypes.Simple:
+                CreateAudio(position, BulletHitAudio);
+                break;
+            case BulletType.bTypes.Grenade:
+                CreateAudio(position, GrenadeExplosionAudio);
+                break;
+            case BulletType.bTypes.Tennis:
+                CreateAudio(position, TennisHitAudio);
+                break;
+        }
     }
 
     private void CreateAudio(Vector3 pos, AudioClip sound)
