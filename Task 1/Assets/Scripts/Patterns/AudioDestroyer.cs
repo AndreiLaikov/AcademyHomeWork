@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class AudioDestroyer : MonoBehaviour
 {
-    private AudioSource audio;
+    private AudioSource audioPlayer;
 
     private void Start()
     {
-        audio = GetComponent<AudioSource>();
+        audioPlayer = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
-        if (!audio.isPlaying)
+        if (!audioPlayer.isPlaying)
             Destroy(gameObject);
     }
 }
