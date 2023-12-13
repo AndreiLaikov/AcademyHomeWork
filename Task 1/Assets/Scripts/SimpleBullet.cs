@@ -10,6 +10,7 @@ public class SimpleBullet : Bullet
 
     protected override void OnCollisionEnter(Collision collision)
     {
-        AudioManager.Instance.BulletHit();
+        base.OnCollisionEnter(collision);
+        AudioManager.Instance.BulletHit(transform.position);
     }
 }

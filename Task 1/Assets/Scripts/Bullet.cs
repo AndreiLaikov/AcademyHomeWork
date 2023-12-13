@@ -27,6 +27,7 @@ public abstract class Bullet : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
+        
         Instantiate(Effect, transform.position, Quaternion.identity);
         BulletDestroy();
     }

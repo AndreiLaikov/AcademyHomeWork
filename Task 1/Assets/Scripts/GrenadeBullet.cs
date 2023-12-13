@@ -8,21 +8,20 @@ public class GrenadeBullet : Bullet
 
     private void Explode()
     {    
-        Vector3 explosionPos = transform.position;
-        Collider[] colliders = Physics.OverlapSphere(explosionPos, radius, mask);
+        Vector3 explosionTransform = transform.position;
+        Collider[] colliders = Physics.OverlapSphere(explosionTransform, radius, mask);
         foreach (Collider hit in colliders)
         {
             Rigidbody rb = hit.GetComponent<Rigidbody>();
             if (rb != null)
-                rb.AddExplosionForce(power, explosionPos, radius);
+                rb.AddExplosionForce(power, explosionTransform, radius);
         }
-
-        AudioManager.Instance.GrenadeExplosion(explosionPos);
     }
 
     protected override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
+        AudioManager.Instance.GrenadeExplosion(transform.position);
         Explode();
     }
 

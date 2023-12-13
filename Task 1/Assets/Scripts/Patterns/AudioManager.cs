@@ -4,6 +4,7 @@ using UnityEngine;
 public class AudioManager : Singleton<AudioManager>
 {
     public AudioSource audioSource;
+    public GameObject Hit;
 
     [Header ("Bullet")]
     public AudioClip BulletShootAudio;
@@ -23,9 +24,9 @@ public class AudioManager : Singleton<AudioManager>
         audioSource.PlayOneShot(BulletShootAudio);
     }
 
-    public void BulletHit()
+    public void BulletHit(Vector3 pos)
     {
-        audioSource.PlayOneShot(BulletHitAudio);
+        CreateAudio(pos, BulletHitAudio);
     }
 
     public void GrenadeShoot()
@@ -33,15 +34,9 @@ public class AudioManager : Singleton<AudioManager>
         audioSource.PlayOneShot(GrenadeShootAudio);
     }
 
-    public void GrenadeExplosion(Vector3 position)
+    public void GrenadeExplosion(Vector3 pos)
     {
-        var go = new GameObject("Explosion");
-        go.transform.position = position;
-        var audio = go.AddComponent<AudioSource>();
-        audio.spatialBlend = 1;
-        audio.clip = GrenadeExplosionAudio;
-        audio.maxDistance = 5;
-        audio.Play();
+        CreateAudio(pos, GrenadeExplosionAudio);
     }
 
     public void TennisShoot()
@@ -49,8 +44,17 @@ public class AudioManager : Singleton<AudioManager>
         audioSource.PlayOneShot(TennisShootAudio);
     }
 
-    public void TennisHit()
+    public void TennisHit(Vector3 pos)
     {
-        audioSource.PlayOneShot(TennisHitAudio);
+        CreateAudio(pos, TennisHitAudio);
+    }
+
+    private void CreateAudio(Vector3 pos, AudioClip sound)
+    {
+        var go = Instantiate(Hit);
+        go.transform.position = pos;
+        var audio = go.GetComponent<AudioSource>();
+        audio.clip = sound;
+        audio.Play();
     }
 }
