@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Moving : MonoBehaviour
@@ -20,6 +21,9 @@ public class Moving : MonoBehaviour
     private float currentSpeed;
     private Animator CharAnimator;
 
+    public List<Rigidbody> bodies;
+    public bool isDeath;
+
     private void Start()
     {
         rBody = GetComponent<Rigidbody>();
@@ -31,14 +35,24 @@ public class Moving : MonoBehaviour
 
     private void Update()
     {
-        
+        if (isDeath)
+        {
+            CharAnimator.enabled = false;
+            foreach (var body in bodies)
+            {
+                body.isKinematic = false;
+            }
+        }
     }
 
     private void FixedUpdate()
     {
+        if (isDeath)
+            return;
+
         GroundCheck();
-        JumpInput();
         MoveInput();
+        JumpInput();
         Quaternion currentRot = rBody.rotation;
         Quaternion targetRot = Quaternion.Euler(0, rotationAngle, 0);
 
@@ -83,7 +97,7 @@ public class Moving : MonoBehaviour
 
     private void GroundCheck()
     {
-        isGrounded = Physics.CheckSphere(transform.position, 0.2f, ignoredLayers);
+        isGrounded = Physics.CheckSphere(transform.position, 0.3f, ignoredLayers);
     }
 
 }
